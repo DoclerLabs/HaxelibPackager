@@ -1,0 +1,3 @@
+-cp src
+-main haxelibpackager.HaxelibPackager
+-neko bin/HaxelibPackager.n

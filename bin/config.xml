@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<replaceparams>
+		<version>0.2.5</version>
+		<releasenote>First stable version. Many singature changes. 
+See https://github.com/DoclerLabs/hexMachina for more information.</releasenote>
+	</replaceparams>
+	
+	<libraries>
+		<library name="hexmachina" url="git:https://github.com/DoclerLabs/hexMachina.git" />
+		<library name="hexcore" url="git:https://github.com/DoclerLabs/hexCore.git" />
+		<library name="hexinject" url="git:https://github.com/DoclerLabs/hexInject.git" />
+		<library name="hexioc" url="git:https://github.com/DoclerLabs/hexIoC.git" />
+		<library name="hexmvc" url="git:https://github.com/DoclerLabs/hexMVC.git" />
+		<library name="hexstate" url="git:https://github.com/DoclerLabs/hexState.git" />
+		<library name="hexservice" url="git:https://github.com/DoclerLabs/hexService.git" />
+		<library name="hexannotation" url="git:https://github.com/DoclerLabs/hexAnnotation.git" />
+		<library name="hexunit" url="git:https://github.com/DoclerLabs/hexUnit.git" />
+	</libraries>
+		
+	<excludefiles>
+		<file name=".git" />
+		<file name="flash" />
+		<file name="build" />
+		<file name="package.json" />
+		<file name=".gitignore" />
+		<file name=".travis.yml" />
+		<file name="build-each.hxml" />
+		<file name="build-flash.hxml" />
+		<file name="build-js.hxml" />
+		<file name=".editorconfig" />
+	</excludefiles>
+		
+	<temppath name="temp" />
+	
+	<password value="*******" />
+</config>
