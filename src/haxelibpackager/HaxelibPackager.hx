@@ -61,14 +61,22 @@ class HaxelibPackager
 		Sys.println(" ");
 		
 		var orderedDependencyList:Array<String> = this.getDependencyOrder( dependencyList );
+		Sys.println(" ");
+		
+		var successCount:Int = 0;
 		
 		for ( i in orderedDependencyList ) 
 		{
-			packageCreator.createPackage( i, Path.join([this.xmlConfigReader.tempPath,i]), this.xmlConfigReader.password, this.xmlConfigReader.excludedFileList );
+			if ( packageCreator.createPackage( i, Path.join([this.xmlConfigReader.tempPath, i]), this.xmlConfigReader.password, this.xmlConfigReader.excludedFileList ) == 0 )
+			{
+				successCount++;
+			}
+			Sys.println(" ");
 			
 		}
 			
-		Sys.println("Libraries pushed successfully!");
+		Sys.println(" ");
+		Sys.println( "[" + successCount + "/" + orderedDependencyList.length + "] LIBRARIES PUSHED SUCCESSFULLY!");
 		
 	}
 	

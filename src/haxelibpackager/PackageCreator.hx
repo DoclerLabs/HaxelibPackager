@@ -15,7 +15,7 @@ class PackageCreator
 		
 	}
 	
-	public function createPackage( libName:String, path:String, password:String, ?excludeFileList:Array<String> )
+	public function createPackage( libName:String, path:String, password:String, ?excludeFileList:Array<String> ):Int
 	{
 		Sys.println("Submitting " + libName + "...");
 		this.removeExcludedFiles( path, excludeFileList );
@@ -31,6 +31,8 @@ class PackageCreator
 		{
 			Sys.println(libName + " FAILED to submit:" + result );
 		}
+		
+		return result;
 	}
 	
 	function removeExcludedFiles(path:String, excludeFileList:Array<String>):Void

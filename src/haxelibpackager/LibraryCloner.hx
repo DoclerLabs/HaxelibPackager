@@ -64,7 +64,7 @@ class LibraryCloner
 		var branch:String = urlArr.length > 0 ? urlArr.shift() : null;
 
 
-		Sys.println("Installing " +libName + " from " +url);
+		Sys.println("Cloning " +libName + " from " +url);
 		
 		try {
 			vcs.clone(libPath, url, branch);
