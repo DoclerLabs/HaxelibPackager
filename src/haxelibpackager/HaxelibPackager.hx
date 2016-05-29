@@ -38,25 +38,25 @@ class HaxelibPackager
 			
 		var libraryCloner = new LibraryCloner();
 		
-		//FsUtils.deleteRec(xmlConfigReader.tempPath);
+		FsUtils.deleteRec(xmlConfigReader.tempPath);
 		
 		var combinedPackageCreator = new CombinedPackageCreator( Path.join([this.xmlConfigReader.tempPath, CombinedPackageCreator.DEFAULT_COMBINED_PATH ]) );
 		
 		
 		for ( i in this.xmlConfigReader.libraryList.keys() ) 
 		{
-			//if ( libraryCloner.installLibrary( i, this.xmlConfigReader.libraryList.get(i), this.xmlConfigReader.tempPath ) )
-			//{
+			if ( libraryCloner.installLibrary( i, this.xmlConfigReader.libraryList.get(i), this.xmlConfigReader.tempPath ) )
+			{
 				var path:String = Path.join([this.xmlConfigReader.tempPath, i]);
 				var currentDependencyList:Array<String> = releaseInfoGenerator.generateReleaseInfo( path, this.xmlConfigReader.releaseInfoList, this.xmlConfigReader.libraryList );
 				dependencyList.set( i, currentDependencyList );
 				Sys.println(" ");
-			/*}
+			}
 			else
 			{
 				Sys.println("There was an ERROR during installing " + i + " library. Process terminated");
 				return;
-			}*/
+			}
 			
 		}
 		
