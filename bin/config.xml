@@ -22,6 +22,7 @@ See https://github.com/DoclerLabs/hexMachina for more information.</releasenote>
 		<file name=".git" />
 		<file name="flash" />
 		<file name="build" />
+		<file name="src/context" />
 		<file name="package.json" />
 		<file name=".gitignore" />
 		<file name=".travis.yml" />
@@ -32,6 +33,7 @@ See https://github.com/DoclerLabs/hexMachina for more information.</releasenote>
 	</excludefiles>
 		
 	<temppath name="temp" />
+	<combinedname value="hexMachina-framework-v$(version).zip" />
 	
 	<password value="*******" />
 </config>

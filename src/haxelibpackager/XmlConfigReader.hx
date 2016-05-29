@@ -13,6 +13,7 @@ class XmlConfigReader
 	public var libraryList = new StringMap<String>();
 	public var excludedFileList = new Array<String>();
 	public var tempPath:String = "temp";
+	public var combinedName:String;
 	public var password:String = "";
 
 	public function new() 
@@ -47,6 +48,7 @@ class XmlConfigReader
 			this.parseReleaseInfoList( fastXml );
 			this.parseExcludedFileList( fastXml );
 			this.parseTempPath( fastXml );
+			this.parseCombinedData( fastXml );
 			this.parsePassword( fastXml );
 		}
 		catch ( e:Dynamic )
@@ -94,7 +96,7 @@ class XmlConfigReader
 	{
 		if ( xml.hasNode.temppath )
 		{
-			this.tempPath = xml.node.temppath.att.name;
+			this.tempPath = this.replaceVariables( xml.node.temppath.att.name );
 		}
 	}
 	
@@ -102,8 +104,26 @@ class XmlConfigReader
 	{
 		if ( xml.hasNode.password )
 		{
-			this.password = xml.node.password.att.value;
+			this.password = this.replaceVariables( xml.node.password.att.value );
 		}
+	}
+	
+	function parseCombinedData( xml:Fast ) 
+	{
+		if ( xml.hasNode.combinedname )
+		{
+			this.combinedName = this.replaceVariables( xml.node.combinedname.att.value );
+		}
+	}
+	
+	function replaceVariables( str:String ):String
+	{
+		for ( i in releaseInfoList.keys() )
+		{
+			str = str.split("$(" + i + ")").join(releaseInfoList.get(i));
+		}
+		
+		return str;
 	}
 	
 }
