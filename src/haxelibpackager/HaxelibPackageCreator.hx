@@ -19,8 +19,6 @@ class HaxelibPackageCreator
 	{
 		Sys.println("Submitting " + libName + "...");
 		
-		return 0;
-		
 		var result:Int = Sys.command( "haxelib submit " + path + " " + password );
 		
 		if ( result == 0 )
