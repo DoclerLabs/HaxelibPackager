@@ -1,4 +1,4 @@
 @echo off
 cd bin
-neko HaxelibPackager.n
+neko HaxelibPackager.n config.xml
 pause

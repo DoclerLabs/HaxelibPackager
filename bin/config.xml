@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <config>
 	<replaceparams>
-		<version>0.2.5</version>
-		<releasenote>First stable version. Many singature changes. 
+		<version>0.3.2</version>
+		<releasenote>Cleared repository from unused classes. 
 See https://github.com/DoclerLabs/hexMachina for more information.</releasenote>
 	</replaceparams>
 	

@@ -13,6 +13,9 @@ import util.Vcs;
 class HaxelibPackager 
 {
 	var xmlConfigReader:XmlConfigReader;
+	var args:Array<String>;
+	var checkOnly:Bool = false;
+	var configFile:String;
 	
 	
 	static function main() 
@@ -22,12 +25,16 @@ class HaxelibPackager
 	
 	public function new( )
 	{
-		Sys.println("Haxelib Packager started...");
+		if ( !this.parseArgs() )
+		{
+			return;
+		}
+		
+		Sys.println("Haxelib Packager started" + (this.checkOnly ? " in CHECK ONLY mode" : " in DEPLOY mode") + " ...");
 		Sys.println(" ");
 		
 		this.xmlConfigReader = new XmlConfigReader();
-		var configUrl:String = Sys.args()[0] == null ? "config.xml" : Sys.args()[0];
-		this.xmlConfigReader.readConfig( configUrl );
+		this.xmlConfigReader.readConfig( this.configFile );
 		
 		var releaseInfoGenerator = new ReleaseInfoGenerator();
 		var packageCleaner = new PackageCleaner();
@@ -74,7 +81,7 @@ class HaxelibPackager
 			var path:String = Path.join([this.xmlConfigReader.tempPath, i]);
 			
 			packageCleaner.removeExcludedFiles( path, this.xmlConfigReader.excludedFileList );
-			if ( haxelibPackageCreator.createPackage( i, path, this.xmlConfigReader.password ) == 0 )
+			if ( this.checkOnly || (haxelibPackageCreator.createPackage( i, path, this.xmlConfigReader.password ) == 0) )
 			{
 				haxelibSuccessCount++;
 			}
@@ -98,6 +105,33 @@ class HaxelibPackager
 			Sys.println( "COMBINED PACKAGE SAVED SUCCESSFULLY: " + xmlConfigReader.combinedName );
 		}
 		
+	}
+	
+	function parseArgs():Bool
+	{
+		this.args = Sys.args();
+		
+		if ( this.args.indexOf("-check") > -1 )
+		{
+			this.checkOnly = true;
+		}
+		
+		if ( this.args.indexOf("-help") > -1 || this.args.length == 0 )
+		{
+			Sys.println( "Usage: haxelibpackager [-check] [-help] configfile.xml" );
+			Sys.println( " " );
+			Sys.println( "-check:          Don't publish packages, but does everything else" );
+			Sys.println( "-help:           Shows this help" );
+			Sys.println( "configfile.xml:  The input configuration file. See the attached example one for syntax." );
+			return false;
+		}
+		
+		if ( this.args[this.args.length - 1].indexOf("-") != 0 )
+		{
+			this.configFile = this.args[this.args.length - 1];
+		}
+		
+		return true;
 	}
 	
 	function getDependencyOrder( dependencyList:StringMap<Array<String>> ):Array<String>
