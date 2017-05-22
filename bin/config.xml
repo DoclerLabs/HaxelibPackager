@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <config>
 	<replaceparams>
-		<version>0.3.2</version>
-		<releasenote>Cleared repository from unused classes. 
-See https://github.com/DoclerLabs/hexMachina for more information.</releasenote>
+		<version>0.16.1</version>
+		<releasenote>Find hexMachina changelog on : https://github.com/DoclerLabs/hexMachina/releases/tag/0.16.0</releasenote>
 	</replaceparams>
 	
 	<libraries>
@@ -16,10 +15,14 @@ See https://github.com/DoclerLabs/hexMachina for more information.</releasenote>
 		<library name="hexservice" url="git:https://github.com/DoclerLabs/hexService.git" />
 		<library name="hexannotation" url="git:https://github.com/DoclerLabs/hexAnnotation.git" />
 		<library name="hexunit" url="git:https://github.com/DoclerLabs/hexUnit.git" />
+		<library name="hexreflection" url="git:https://github.com/DoclerLabs/hexReflection.git" />
+		<library name="hexdsl" url="git:https://github.com/DoclerLabs/hexDsl.git" />
+		<library name="hexlog" url="git:https://github.com/DoclerLabs/hexLog.git" />
 	</libraries>
 		
 	<excludefiles>
 		<file name=".git" />
+		<file name=".travis" />
 		<file name="flash" />
 		<file name="build" />
 		<file name="src/context" />
@@ -29,7 +32,10 @@ See https://github.com/DoclerLabs/hexMachina for more information.</releasenote>
 		<file name="build-each.hxml" />
 		<file name="build-flash.hxml" />
 		<file name="build-js.hxml" />
+		<file name="build-neko.hxml" />
+		<file name="build-php.hxml" />
 		<file name=".editorconfig" />
+		<file name=".codeclimate.yml" />
 	</excludefiles>
 		
 	<temppath name="temp" />

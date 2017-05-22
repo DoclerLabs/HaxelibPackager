@@ -136,12 +136,20 @@ class HaxelibPackager
 	
 	function getDependencyOrder( dependencyList:StringMap<Array<String>> ):Array<String>
 	{
+		Sys.println("Determinated dependency order source: " + dependencyList);
 		var orderedList = new Array<String>();
 		
+		Sys.println("Calcul recursive dependencies");
+		for ( i in dependencyList.keys() )
+		{
+			dependencyList.set(i, getRecursiveDependencies(i, dependencyList));
+		}
+
 		for ( i in dependencyList.keys() )
 		{
 			var actDependencyList:Array<String> = dependencyList.get(i);
-			
+			//Sys.println(i + " needs : " + actDependencyList);
+
 			var found:Bool = false;
 			
 			for ( j in 0...orderedList.length )
@@ -149,6 +157,7 @@ class HaxelibPackager
 				if ( dependencyList.get(orderedList[j]).indexOf(i) > -1 )
 				{
 					found = true;
+					//Sys.println(orderedList[j] + " needs " + i + " before " + orderedList[j]);
 					orderedList.insert( j, i );
 					break;
 				}
@@ -156,6 +165,7 @@ class HaxelibPackager
 			
 			if ( !found )
 			{
+				//Sys.println(i + " not found add at the end");
 				orderedList.push( i );
 			}
 			
@@ -164,6 +174,19 @@ class HaxelibPackager
 		Sys.println("Determinated dependency order: " + orderedList);
 		
 		return orderedList;
+	}
+
+	function getRecursiveDependencies( id:String, dependencyList:StringMap<Array<String>> ):Array<String>
+	{
+		var subDependencyList = new Array<String>();
+
+		for ( d in dependencyList.get(id) )
+		{
+			subDependencyList.push(d);
+			subDependencyList = subDependencyList.concat(getRecursiveDependencies(d, dependencyList));
+		}
+
+		return subDependencyList;
 	}
 	
 	
