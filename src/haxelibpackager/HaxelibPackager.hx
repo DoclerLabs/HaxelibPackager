@@ -178,6 +178,11 @@ class HaxelibPackager
 
 	function getRecursiveDependencies( id:String, dependencyList:StringMap<Array<String>> ):Array<String>
 	{
+		if( !dependencyList.exists(id) )
+		{
+			return [];
+		}
+		
 		var subDependencyList = new Array<String>();
 
 		for ( d in dependencyList.get(id) )
